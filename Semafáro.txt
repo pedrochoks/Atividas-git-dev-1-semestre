@@ -1,0 +1,101 @@
+// semafáro
+//
+
+#define pinLEDvermelho1 13
+ #define pinLEDamarelo1 12
+  #define pinLEDverde1 11
+
+#define pinLEDvermelho2 7
+ #define pinLEDamarelo2 6
+  #define pinLEDverde2 5
+
+#define pedestre1verde 8
+ #define pedestre1vermelho 9
+
+#define pedestre2verde 1
+ #define pedestre2vermelho 2
+
+
+/* verde- 3s
+amarelo-2s
+vermelho-5s
+*/
+
+void setup()
+{
+pinMode(pinLEDvermelho1, OUTPUT);
+ pinMode(pinLEDverde1, OUTPUT);
+  pinMode(pinLEDamarelo1, OUTPUT);
+
+pinMode(pinLEDvermelho2, OUTPUT);
+ pinMode(pinLEDamarelo2, OUTPUT);
+  pinMode(pinLEDverde2, OUTPUT);
+  
+pinMode(pedestre1verde, OUTPUT);
+ pinMode(pedestre1vermelho, OUTPUT);
+  pinMode(pedestre2verde, OUTPUT);
+   pinMode(pedestre2vermelho,OUTPUT);
+}
+
+void loop()
+{
+digitalWrite(pedestre1vermelho, HIGH);
+ digitalWrite(pedestre2verde, HIGH);
+   delay(1);
+  
+digitalWrite(pinLEDverde1, HIGH);
+ digitalWrite(pinLEDvermelho2, HIGH);
+  delay(3000);
+  
+digitalWrite(pinLEDverde1, LOW);
+ digitalWrite(pinLEDamarelo1, HIGH);
+   delay(2000);
+  
+ //pedestre piscar//
+digitalWrite(pedestre1vermelho,LOW);
+ delay(200);
+  digitalWrite(pedestre1vermelho,HIGH);
+   delay(200);
+    digitalWrite(pedestre1vermelho,LOW);
+     delay(200);
+      digitalWrite(pedestre1vermelho,HIGH);
+       delay(200);
+        digitalWrite(pedestre1vermelho,LOW);
+         delay(1);
+          digitalWrite(pedestre2verde,LOW);
+           delay(1);
+  
+digitalWrite(pinLEDamarelo1, LOW);
+ digitalWrite(pinLEDvermelho2, LOW);
+  delay(1);
+  
+digitalWrite(pedestre2vermelho, HIGH);
+ digitalWrite(pedestre1verde, HIGH);
+  delay(1);
+  
+digitalWrite(pinLEDverde2, HIGH);
+ digitalWrite(pinLEDvermelho1, HIGH);
+  delay(3000);
+  
+digitalWrite(pinLEDverde2, LOW);
+ digitalWrite(pinLEDamarelo2, HIGH);
+   delay(2000);
+  
+digitalWrite(pedestre2vermelho,LOW);
+ delay(200);
+  digitalWrite(pedestre2vermelho,HIGH);
+   delay(200);
+    digitalWrite(pedestre2vermelho,LOW);
+     delay(200);
+      digitalWrite(pedestre2vermelho,HIGH);
+       delay(200);
+        digitalWrite(pedestre2vermelho,LOW);
+         digitalWrite(pedestre1verde,LOW);
+          delay(1);
+  
+digitalWrite(pinLEDamarelo2, LOW);
+ digitalWrite(pinLEDvermelho1,LOW);
+  delay(1);
+  
+}
+  
