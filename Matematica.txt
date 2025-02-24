@@ -1,0 +1,113 @@
+int numeroA = 14;
+int numeroB = 5;
+int resultado = 0;
+float resultadoReal = 0;
+
+void setup()
+{
+ Serial.begin(9600);
+
+//soma A+B
+  
+resultado = numeroA + numeroB;
+ Serial.print("A soma do numero A e B eh:");
+  Serial.println(resultado);
+  
+//subtracao
+resultado = numeroB - numeroA;
+ Serial.print("a subtracao do numero A e B eh");
+  Serial.println(resultado);
+  
+//multiplicacao
+resultado = numeroA * numeroB;
+ Serial.print("a multiplicacao do numero A e B eh:");
+  Serial.println(resultado);
+  
+//divisao
+resultado = numeroA / numeroB;
+ Serial.print("a divisao do numero A e B eh:");
+  Serial.println(resultado);
+  
+resultado = numeroA % numeroB;
+ Serial.print("e sobra:");
+  Serial.println(resultado);
+  
+resultadoReal = (float) numeroA / (float)numeroB;
+ Serial.print("ou");
+  Serial.println(resultadoReal, 1); //limita o resultado em 1 casa decimal
+  
+//potencia
+resultado = pow(numeroA,numeroB); //'a' elevado a 'b'
+ Serial.print("'a' elevado a 'b' eh:");
+  Serial.println(resultado);
+  
+//quadrado
+resultado = sq(numeroA); //numero A elevado ao quadrado
+ Serial.print("numero A ao quadrado eh:");
+  Serial.println(resultado);
+  
+//raiz quadrada
+resultadoReal = sqrt(numeroA);
+ Serial.print("a raiz quadrada do numero A eh:");
+  Serial.println(resultadoReal);
+  
+//modulo
+resultado = abs(numeroA*-1);
+ Serial.print("o modulo do numero A eh:");
+  Serial.println(resultado);  
+  
+//restricao
+resultado = constrain(numeroA, -3, 5); //resttringe o numero A aos -3 e 5
+  
+Serial.println(resultado);
+ 
+//remapeamento
+resultado = map(numeroA, 0, 20, 0, 10);
+//map(valor, deMenor, deMaior, paraMenor, paraMaior)
+Serial.println(resultado);
+  
+//operadores de atribuicao
+  
+//numeroA = numeroA + 5;
+Serial.println(numeroA += 5);
+  
+//numeroA =numeroA - 5;
+Serial.println(numeroA -= 5);
+  
+//numeroA = numeroA * 2;
+Serial.println(numeroA *= 2);
+  
+//numeroA =numeroA / 2;
+Serial.println(numeroA /= 2);
+
+  //INCREMENTAR A VARIAVEL
+  //numeroA + 1;
+  Serial.println(numeroA++); //Pos incremnto
+  Serial.println(++numeroA); //Pre incremnto
+  
+  //DECREMENTAR A VARIAVEL
+  Serial.println(numeroA--); //Pos incremnto
+  Serial.println(--numeroA); //Pre incremnto
+
+  resultadoReal = ( (2.0 / 5.0) + (2*3) );
+  Serial.println(resultadoReal);
+  
+ //Desafio mapeamento
+  
+  float valor=0;
+  float deMenor=-10;
+  float deMaior=10;
+  float paraMenor =0;
+  float paraMaior=500;
+ 
+  float resultadoReal=0;
+  
+
+ resultadoReal = (valor-deMenor) * (paraMaior-paraMenor) / (deMaior-deMenor) + paraMenor ;
+  Serial.println(resultadoReal);
+}
+
+void loop()
+{
+
+}
