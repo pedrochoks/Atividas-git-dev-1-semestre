@@ -1,0 +1,39 @@
+float altura = 1.68;
+float peso = 70;
+float resultado1 = 0;
+float resultado2 = 0;
+
+
+void setup()
+{
+ Serial.begin(9600);
+  
+    resultado1 =  sq(altura);
+  
+  resultado2 = peso / resultado1 ;
+   Serial.println("O IMC dessa pessoa eh:");
+    Serial.println(resultado2);
+  
+  if (resultado2 <= 18.5)
+  {
+    Serial.println("Voce esta abaixo do peso");
+  }
+    else if (resultado2 >= 18.5 & resultado2 <= 24.9)
+    {
+      Serial.println("Voce esta com o peso adequado");
+    }
+      else if (resultado2 >= 25 & resultado2 <= 29.9)
+      {
+        Serial.println("Voce esta com sobrepeso");
+      }
+  else 
+  {
+    Serial.print("Voce esta obeso");
+  }
+  
+
+}
+void loop()
+{
+ 
+}
