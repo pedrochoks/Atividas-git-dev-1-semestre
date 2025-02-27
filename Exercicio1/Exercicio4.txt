@@ -1,0 +1,23 @@
+int numero = 4;
+
+void setup()
+{  
+pinMode(13, OUTPUT);
+ Serial.begin(9600);
+  
+  int resultado = numero % 2;
+  if (resultado == 1)
+  {
+    Serial.println("impar");
+  
+  }
+     else 
+     {
+       Serial.println("par");
+        digitalWrite(13, HIGH);
+     }
+}
+void loop()
+{
+  
+}

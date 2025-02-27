@@ -1,0 +1,32 @@
+#define Alerta 13
+
+void setup()
+{
+ pinMode(Alerta, OUTPUT);
+  Serial.begin(9600);
+  
+  int valor = 600;
+
+   int valorMap = map(valor, 0, 1023, 0, 100);
+    Serial.println(valorMap);
+  
+   if(valorMap <= 20 || valorMap >= 80)
+    {
+     digitalWrite( Alerta, HIGH);
+      delay(1000);   
+        
+    }
+      else 
+      {
+          Serial.println("o valor esta dentro dos limites");
+      }
+  
+   int valorConstrain = constrain(valorMap, 20, 80);
+    Serial.println(valorConstrain);
+ 
+}
+
+void loop()
+{
+ 
+}

@@ -1,0 +1,19 @@
+
+void setup ()
+{
+  int inteiro = 1200;
+    
+ Serial.begin(9600);
+    if(inteiro <0)
+    {
+      Serial.println("Negativo");
+    }
+      else 
+      {
+        Serial.println("Positivo");
+      }
+}
+void loop()
+{
+ 
+}

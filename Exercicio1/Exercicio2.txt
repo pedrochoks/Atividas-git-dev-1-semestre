@@ -1,0 +1,20 @@
+int bateria = 47;
+
+void setup()
+{
+  Serial.begin(9600);
+   
+  if (bateria >= 20 & bateria <= 80)
+   {
+     Serial.print(" Alerta");
+   }
+   
+       else
+       {
+        Serial.print(bateria);
+       }
+}
+void loop()
+{
+ 
+}

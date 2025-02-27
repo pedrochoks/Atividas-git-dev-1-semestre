@@ -1,0 +1,30 @@
+float salario =499 ;
+float AumentoDoSalario = 0;
+float SalarioReajustado = 0;
+void setup()
+{
+Serial.begin(9600);
+ if(salario < 500)
+ {
+ AumentoDoSalario =  salario*30 / 100;
+  Serial.println("Seu aumento foi de:");
+   Serial.println(AumentoDoSalario);
+   
+  SalarioReajustado = salario + AumentoDoSalario;
+   Serial.println("Seu salario eh de:");
+    Serial.println(SalarioReajustado);
+ } 
+  else
+  {
+   Serial.println("Voce nao tem direito de aumento. Seu salario continua sendo:");
+    Serial.print(salario);
+  }
+  
+  
+  
+}
+
+void loop()
+{
+ 
+}

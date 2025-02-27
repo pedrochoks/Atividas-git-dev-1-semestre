@@ -1,0 +1,21 @@
+#define Alerta 1
+
+int valor = 21;
+  
+void setup()
+{
+ pinMode(Alerta, OUTPUT);
+ 
+  if (valor < 30)
+   {
+     digitalWrite(Alerta, HIGH);
+   }
+     else
+     {
+       digitalWrite(Alerta, LOW);
+     }
+}
+void loop()
+{
+  
+}

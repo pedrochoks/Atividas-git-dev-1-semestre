@@ -1,0 +1,22 @@
+float valor1 = 32;
+float valor2 = 29;
+void setup()
+{
+ Serial.begin(9600);
+  
+  if(valor1 > valor2)
+  {
+    Serial.println("imprima o valor:");
+     Serial.println(valor1);
+  }
+     else if( valor2 > valor1)
+     {
+       Serial.print("imprima o valor:");
+        Serial.println(valor2);
+     }
+}
+
+void loop()
+{
+ 
+}
