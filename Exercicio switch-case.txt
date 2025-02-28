@@ -1,0 +1,48 @@
+#define verde 2 
+#define amarelo 3
+#define vermelho 4
+#define azul 5
+#define branco 6
+
+void setup()
+{
+  pinMode(verde, OUTPUT);
+  pinMode(amarelo, OUTPUT);
+  pinMode(vermelho, OUTPUT);
+  pinMode(azul, OUTPUT);
+  pinMode(branco, OUTPUT);
+  
+  
+//Serial.begin(9600);
+  
+  int leds = 2;
+    
+    switch(leds)
+    {
+     case 2:
+    digitalWrite(verde,HIGH);
+     break;
+   
+      case 3:
+     digitalWrite(amarelo,HIGH);
+      break;
+    
+        case 4:
+       digitalWrite(vermelho,HIGH);
+        break;
+     
+          case 5:
+         digitalWrite(azul,HIGH);
+          break;
+         
+            case 6:
+           digitalWrite(branco,HIGH);
+            break;
+    }
+  
+}
+
+void loop()
+{
+ 
+}
