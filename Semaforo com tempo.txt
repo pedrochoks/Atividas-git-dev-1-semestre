@@ -1,0 +1,187 @@
+#define verde 13
+#define amarelo 12
+#define vermelho 11
+
+const int tempoVerde = 3000;
+const int tempoAmarelo = 2000;
+const int tempoVermelho = 5000;
+   
+
+unsigned long tempoAtual;
+unsigned long tempoInicial = 0;
+int faseSemaforo = 0;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(verde, OUTPUT);
+  pinMode(amarelo ,OUTPUT);
+  pinMode(vermelho ,OUTPUT);
+}
+
+ void loop()
+{
+
+  tempoAtual = millis();
+  /*
+  if(faseSemaforo == 0)
+  { digitalWrite(verde,HIGH);
+   
+   if(tempoAtual - tempoInicial >= tempoVerde)
+   {
+     digitalWrite(verde, LOW);
+     
+     tempoInicial = tempoms;
+     faseSemaforo = 1;
+   }
+  }   
+   else if(faseSemaforo == 1)
+   { 
+      digitalWrite(amarelo, HIGH);
+     if(tempoAtual - tempoInicial >= tempoAmarelo)
+     {   
+       digitalWrite(amarelo, LOW);
+
+       tempoInicial = tempoms;
+       faseSemaforo = 2;
+     }
+   }  
+   else if(faseSemaforo == 2)
+   { 
+    	digitalWrite(vermelho, HIGH);
+
+     if(tempoAtual - tempoInicial >= tempoVermelho)
+     {
+       digitalWrite(vermelho,LOW);
+       
+       tempoInicial = tempoms;
+       faseSemaforo = 0;
+     }
+   }*/
+   
+   if(tempoAtual - tempoInicial >= 1000)
+   {
+     faseSemaforo++;
+     if(faseSemaforo == 10) faseSemaforo = 0;
+     {
+       	Serial.println(faseSemaforo);
+        tempoInicial = tempoAtual;
+     }
+   }
+    
+     switch(faseSemaforo)
+     {
+       case 0:
+       digitalWrite(vermelho,LOW);
+       digitalWrite(verde, HIGH);
+       
+       break;
+       
+       case 3:
+       digitalWrite(verde,LOW);
+       digitalWrite(amarelo,HIGH);
+       
+       break;
+       
+       case 5:
+       digitalWrite(amarelo,LOW);
+       digitalWrite(vermelho,HIGH);
+       
+       break;    
+       
+     }   
+}
+
+//cruzamento
+
+#define verde 13
+#define amarelo 12
+#define vermelho 11
+#define verde2 10
+#define amarelo2 9
+#define vermelho2 8
+
+const int tempoVerde = 3000;
+const int tempoAmarelo = 2000;
+const int tempoVermelho = 5000;
+   
+unsigned long tempoms;
+unsigned long tempoInicial = 0;
+int faseSemaforo = 0;
+
+void setup()
+{
+  pinMode(verde, OUTPUT);
+  pinMode(amarelo ,OUTPUT);
+  pinMode(vermelho ,OUTPUT);
+}
+
+ void loop()
+{
+
+  tempoms = millis();
+  
+  if(faseSemaforo == 0)
+  { digitalWrite(verde,HIGH);
+    digitalWrite(vermelho2, HIGH);
+   
+   if(tempoms - tempoInicial >= 3000)
+   {
+     digitalWrite(verde, LOW);
+     tempoInicial = tempoms;
+     faseSemaforo = 1;
+   }
+  } 
+   
+   else if(faseSemaforo == 1)
+   { 
+      digitalWrite(amarelo, HIGH);
+     if(tempoms - tempoInicial >= 2000)
+     {   
+       digitalWrite(amarelo, LOW);
+       digitalWrite(vermelho2, LOW);
+
+       tempoInicial = tempoms;
+       faseSemaforo = 2;
+     }
+   }  
+   
+   else if(faseSemaforo == 2)
+   { 
+    	digitalWrite(vermelho, HIGH);
+     	digitalWrite(verde2, HIGH);
+
+     if(tempoms - tempoInicial >= 3000)
+     {
+       digitalWrite(verde2,LOW); 
+       digitalWrite(amarelo2, HIGH);
+       tempoInicial = tempoms;
+       
+       faseSemaforo = 3;
+     }
+   }
+   
+    	 else if(faseSemaforo == 3)
+         {     		 
+     	    if(tempoms - tempoInicial >= 2000)
+    		{   
+      	            digitalWrite(amarelo2, LOW);
+      	            digitalWrite(vermelho, LOW);
+
+      		    tempoInicial = tempoms;
+                    faseSemaforo = 0;
+     	       }
+         }  
+}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
