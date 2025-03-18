@@ -1,0 +1,45 @@
+//
+
+int numeros[10];
+  
+
+
+
+void setup()
+{
+  Serial.begin(9600);
+  unsigned int numero1 = 0;
+  unsigned int numero2 = 1;
+  
+  	for( int i = 0; i < 10 ; i++)
+  	{      
+        numeros[i] = numero1;
+     	unsigned int resultado = numero1 + numero2 ;
+	 	numero1 = numero2;
+	 	numero2 = resultado; 	
+  	}
+  for(int i = 0; i <10; i++)
+  {
+   	Serial.println(numeros[i]);
+    Serial.println(numeros[7]);
+  }
+	  
+  
+}
+
+void loop()
+{
+	/* static unsigned long numero1 = 0;
+	   static unsigned long numero2 = 1;
+       static unsigned long resultado = 1;
+  
+ 
+
+ 	 resultado = numero1 + numero2 ;
+	 Serial.println(resultado);
+	 numero1 = numero2;
+	 numero2 = resultado; 	
+   	 delay(1000);
+	*/
+
+}
