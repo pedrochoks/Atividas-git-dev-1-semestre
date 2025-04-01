@@ -1,0 +1,33 @@
+#include <Arduino.h>
+#define pinLed 19
+
+//*PROTOTIPO DA FUNCAO
+int calculaSegundoGrau(int, int, int);
+
+void setup()
+{
+  Serial.begin(9600);
+  int raizDaFuncao;
+  raizDaFuncao = calculaSegundoGrau(1, 6, 9);
+  Serial.println(raizDaFuncao);
+}
+
+void loop()
+{
+}
+
+int calculaSegundoGrau(int a, int b, int c)
+{
+  int resultado;
+
+  int delta = ((b * b) - (4 * a * c));
+  if (delta >= 0)
+  {
+    int resultado = (-b + sqrt(delta)) / (2 * a);
+    return resultado;
+  }
+  else
+  {
+    Serial.print("nao existe raiz, DELTA menor que 0");
+  }
+}

@@ -1,0 +1,217 @@
+#include <Arduino.h>
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+
+#define pinLed 18
+#define botao1 15
+#define botao2 23
+
+byte linha1[] = {
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00111,
+    B00111,
+    B00111};
+byte linha2[] = {
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B11100,
+    B11100,
+    B11100};
+
+byte linha3[] = {
+    B00111,
+    B00111,
+    B00111,
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000};
+
+byte linha4[] = {
+    B11100,
+    B11100,
+    B11100,
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000};
+
+byte linha5[] = {
+    B00000,
+    B00000,
+    B00000,
+    B11111,
+    B11111,
+    B11111,
+    B11111,
+    B11111};
+
+byte linha6[] = {
+    B11111,
+    B11111,
+    B11111,
+    B11111,
+    B11111,
+    B00000,
+    B00000,
+    B00000};
+
+byte linha7[] = {
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000,
+    B00000};
+
+void setup()
+{
+
+  Serial.begin(9600);
+  pinMode(pinLed, OUTPUT);
+  pinMode(botao1, INPUT_PULLUP);
+  pinMode(botao2, INPUT_PULLUP);
+  lcd.init();
+  lcd.createChar(0, linha1);
+  lcd.createChar(1, linha2);
+  lcd.createChar(2, linha3);
+  lcd.createChar(3, linha4);
+  lcd.createChar(4, linha5);
+  lcd.createChar(5, linha6);
+  lcd.createChar(6, linha7);
+  lcd.backlight();
+  lcd.home();
+  lcd.print("VERMELHO");
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  bool estadoAtualBotao1 = digitalRead(botao1);
+  static bool estadoAnteriorBotao1 = 1;
+  static bool ultimaAcao1 = 1;
+
+  static unsigned long tempoUltimaAlteracao1 = 0;
+  unsigned long tempoAtual = millis();
+  const unsigned long tempoFiltro = 50;
+
+  static bool estadoLed = 1;
+
+  // detecta mudanca no estado do botao
+  if (estadoAtualBotao1 != estadoAnteriorBotao1)
+  {
+    tempoUltimaAlteracao1 = tempoAtual;
+  }
+
+  // verifica se o novo estado se manteve estavel por tempo suficiente
+  if ((tempoAtual - tempoUltimaAlteracao1) > tempoFiltro)
+  {
+    // verifica se ainda nao processamos essa nova acao
+    if (estadoAtualBotao1 != ultimaAcao1)
+    {
+      ultimaAcao1 = estadoAtualBotao1; // atualiza p estado ja processado para evitar acoes repeti
+
+      if (!estadoAtualBotao1)
+      {
+        digitalWrite(pinLed, estadoLed);
+        estadoLed = !estadoLed;
+      }
+
+      switch (estadoLed)
+      {
+      case 0:
+        lcd.setCursor(9, 0);
+        lcd.print("ON        ");
+
+        break;
+
+      case 1:
+        lcd.setCursor(9, 0);
+        lcd.print("OFF        ");
+      }
+    }
+  }
+  estadoAnteriorBotao1 = estadoAtualBotao1;
+  // fim botao 1
+
+  bool estadoAtualBotao2 = digitalRead(botao2);
+  static bool estadoAnteriorBotao2 = 1;
+  static bool ultimaAcao2 = 1;
+
+  static bool estadoLedPiscando = 0;
+  static bool fasePiscando = 1;
+  static int faseLed = 0;
+
+  // detecta mudanca no estado do botao
+  if (estadoAtualBotao2 != estadoAnteriorBotao2 && faseLed == 0)
+  {
+    {
+      lcd.setCursor(9, 0);
+      lcd.print("Piscando");
+      lcd.setCursor(18, 0);
+      lcd.write(0);
+      lcd.setCursor(19, 0);
+      lcd.write(1);
+      lcd.setCursor(18, 1);
+      lcd.write(2);
+      lcd.setCursor(19, 1);
+      lcd.write(3);
+      digitalWrite(pinLed, !estadoLedPiscando);
+      delay(300);
+      digitalWrite(pinLed, estadoLedPiscando);
+      delay(300);
+      faseLed = 1;
+    //  if(estadoAtualBotao2)
+
+      if (estadoAtualBotao2 != estadoAnteriorBotao2 && faseLed == 1)
+      {
+        lcd.setCursor(18, 0);
+        lcd.write(4);
+        lcd.setCursor(19, 0);
+        lcd.write(4);
+        lcd.setCursor(18, 1);
+        lcd.write(5);
+        lcd.setCursor(19, 1);
+        lcd.write(5);
+        digitalWrite(pinLed, !estadoLedPiscando);
+        delay(300);
+        digitalWrite(pinLed, estadoLedPiscando);
+        delay(300);
+        faseLed = 2;
+
+        if (estadoAtualBotao2 !=  estadoAnteriorBotao2 && faseLed == 2)
+        {
+          lcd.setCursor(18, 0);
+          lcd.write(6);
+          lcd.setCursor(19, 0);
+          lcd.write(6);
+          lcd.setCursor(18, 1);
+          lcd.write(6);
+          lcd.setCursor(19, 1);
+          lcd.write(6);
+          digitalWrite(pinLed, !estadoLedPiscando);
+          delay(300);
+          digitalWrite(pinLed, estadoLedPiscando);
+          delay(300);
+        }
+
+        lcd.setCursor(9, 0);
+        lcd.print("                 ");
+        lcd.setCursor(9, 1);
+        lcd.print("                 "); 
+        faseLed = 0;
+      }
+    }
+  }
+}

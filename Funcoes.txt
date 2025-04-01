@@ -1,0 +1,22 @@
+#include <Arduino.h>
+#define pinLed 19
+
+void piscaLed(uint8_t pin);
+
+void setup()
+{
+  pinMode(pinLed, OUTPUT);
+}
+
+void loop()
+{
+  piscaLed(pinLed);
+}
+
+void piscaLed(uint8_t pin)
+{
+  digitalWrite(pin, HIGH);
+  delay(300);
+  digitalWrite(pin, LOW);
+  delay(300);
+}
