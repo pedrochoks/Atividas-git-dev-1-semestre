@@ -1,0 +1,64 @@
+#include <Arduino.h>
+
+struct Pessoa
+{
+  char nome[20];
+  int idade;
+  float altura;
+  bool calvice;
+};
+
+struct Cor
+{
+  char nome[20];
+  int r;
+  int g;
+  int b;
+};
+
+Cor rgb;
+
+Pessoa aluno;
+Pessoa professor;
+void setup()
+{
+  Serial.begin(9600);
+
+  strcpy(rgb.nome, "#701fc0");
+  rgb.r = 112;
+  rgb.g = 31;
+  rgb.b = 192;
+
+  Serial.printf("a cor eh: %s \n\r", rgb.nome);
+  Serial.printf("seu R eh: %d\n\r", rgb.r);
+  Serial.printf("seu G eh; %d\n\r", rgb.g);
+  Serial.printf("seu B eh: %d\n\r", rgb.b);
+
+
+
+  strcpy(aluno.nome, "Pedro");
+  aluno.idade = 16;
+  aluno.altura = 1.72;
+  aluno.calvice = false;
+
+  strcpy(professor.nome, "Odirlei");
+  professor.idade = 47;
+  professor.altura = 1.80;
+  professor.calvice = true;
+
+  //ALUNO
+  Serial.printf("meu nome eh: %s \n\r", aluno.nome);
+  Serial.printf("E tenho %d anos \n\r", aluno.idade);
+  Serial.printf("tenho %.2f metros de altura\n\r", aluno.altura);
+  Serial.printf("E %s calvo\n\r", aluno.calvice ? "nao sou" : "nap sou"); // ?==se for verdade. : == se for falso
+  //PROFESSOR
+  Serial.printf("meu nome eh: %\n\r", professor.nome);
+  Serial.printf("E tenho %d anos \n\r", professor.idade);
+  Serial.printf("tenho %.2f metros de altura\n\r", professor.altura);
+  Serial.printf("E %s calvo", professor.calvice ? "nao sou" : "nap sou"); // ?==se for verdade. : == se for falso
+
+}
+
+void loop()
+{
+}
