@@ -1,0 +1,80 @@
+#include <Arduino.h>
+#include <PubSubClient.h>
+#include <WiFi.h>
+#include "internet.h"
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+const char *mqtt_server = "broker.hivemq.com";
+const int mqtt_port = 1883;
+const char *mqtt_id = "esp32-senai134-pedrochoks";
+const char *mqtt_topic_sub = "senai134/mesa05/eps_inscrito";
+const char *mqtt_topic_pub = "senai134/mesa05/eps_publicando";
+
+void callback(char *, byte *, unsigned int);
+void mqttConnect(void);
+
+void setup()
+{
+  Serial.begin(9600);
+  conectaWiFi();
+
+  client.setServer(mqtt_server, mqtt_port);
+  client.setCallback(callback);
+}
+
+void loop()
+{
+  checkWiFi();
+
+  if(!client.connected())
+   mqttConnect();
+
+ client.loop();
+ 
+ static unsigned long tempoAnterior = 0;
+ unsigned long tempoAtual = millis();
+ 
+ if(tempoAtual - tempoAnterior > 3000)
+ {
+  client.publish(mqtt_topic_pub, "Ola mundo");
+  tempoAnterior = tempoAtual;
+ }
+}
+
+
+void callback(char *topic, byte *payLoad, unsigned int Lenght)
+{
+  Serial.printf("mensagem recebida em %s:", topic);
+
+  String mensagem = "";
+  for(unsigned int i =0; i < Lenght; i++)
+  {
+    char c = (char)payLoad[i];
+    mensagem += c;
+  }
+  Serial.println(mensagem);
+}
+
+void mqttConnect()
+{
+  while(!client.connected())
+  {
+    Serial.println("Conectando ao MQTT...");
+    
+    if(client.connect(mqtt_id))
+    {
+      Serial.println("conectado com sucesso");
+      client.subscribe(mqtt_topic_sub);
+    }
+
+    else
+    {
+      Serial.print("falha, rc=");
+      Serial.println(client.state());
+      Serial.println("tentando novamente em 5 segundos");
+      delay(5000);
+    }
+  }
+}
